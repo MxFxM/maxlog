@@ -1,5 +1,6 @@
 import influxdb_client
 from influxdb_client.client.write_api import SYNCHRONOUS
+from datetime import datetime
 import os
 
 # Define your bucket, organization, and token
@@ -23,8 +24,11 @@ def read_temperature():
 # Read the temperature
 temp = read_temperature()
 
+# Get the current UTC time in nanoseconds
+now = int(datetime.utcnow().timestamp() * 1e9)
+
 # Create a point with the current timestamp and temperature
-p = influxdb_client.Point("temperature").field("value", temp).time(influxdb_client.current_utc_time())
+p = influxdb_client.Point("temperature").field("value", temp).time(now)
 
 # Write the point to InfluxDB
 write_api.write(bucket=bucket, org=org, record=p)
