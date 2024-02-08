@@ -2,6 +2,10 @@
 
 echo "checking for docker"
 echo "running docker compose"
+cd ./setup
+docker-compose up -d
+cd ..
+
 echo "creating influx credentials"
 
 echo "creating python environment"
