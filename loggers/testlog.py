@@ -1,7 +1,7 @@
 import influxdb_client
 from influxdb_client.client.write_api import SYNCHRONOUS
-import time
 import os
+from datetime import datetime, timezone
 
 # Define your bucket, organization, and token
 bucket = "maxlogbucket"
@@ -25,7 +25,7 @@ def read_temperature():
 temp = read_temperature()
 
 # Get the current UTC time in nanoseconds
-now = int(time.time() * 1e9)
+now = int(datetime.now(timezone.utc).timestamp() * 1e9)
 
 # Create a point with the current timestamp and temperature
 p = influxdb_client.Point("temperature").field("value", temp).time(now)
