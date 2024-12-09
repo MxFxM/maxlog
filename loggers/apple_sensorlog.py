@@ -18,6 +18,10 @@ org = "maxlogorg"
 token = "maxlogadmintoken"
 url = "http://localhost:8086"  # Adjust the URL if your InfluxDB instance is not running on localhost
 
+# Define SensorLog connection
+sensorlog_ip = '192.168.188.53'
+sensorlog_port = 59526
+
 # Instantiate the client
 client = influxdb_client.InfluxDBClient(url=url, token=token, org=org)
 
@@ -101,7 +105,7 @@ class TCPConnection:
 
 # Create TCP client and connect to host
 listen = TCPConnection()
-listen.connect('192.168.188.53', 59526)
+listen.connect(sensorlog_ip, sensorlog_port)
 
 # Read incoming packets until end or q-key and ENTER is pressed
 listen.readlines()
