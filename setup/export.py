@@ -17,7 +17,8 @@ query_api = client.query_api()
 query = f'from(bucket: "{bucket}") |> range(start: -1d)'  # Adjust the range as needed
 csv_result = query_api.query_csv(query=query, org=org)
 
-with open(f'measurement_{int(time.time())}.csv', 'w', newline='') as csv_file:
+export_file_name = f'measurement_{int(time.time())}.csv'
+with open(export_file_name, 'w', newline='') as csv_file:
     writer = csv.writer(csv_file)
     for row in csv_result:
         writer.writerow(row)
