@@ -1,3 +1,10 @@
+###
+# To collect voltage measurements from the owon oscilloscope
+###
+# Requires:
+# vds1022
+###
+
 from vds1022 import *
 import influxdb_client
 from influxdb_client.client.write_api import SYNCHRONOUS
