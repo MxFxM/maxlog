@@ -25,6 +25,21 @@ with open(export_file_name, 'w', newline='') as csv_file:
 
 
 
+def is_file_empty(file_path):
+    if os.path.exists(file_path):
+        return os.path.getsize(file_path) == 0
+    else:
+        raise FileNotFoundError("File not found")
+
+try:
+    if is_file_empty(export_file_name):
+        print("The exported file is empty and will be deleted.")
+        os.remove(export_file_name)
+except FileNotFoundError as fnf:
+    print(fnf)
+
+
+
 from influxdb_client.client.delete_api import DeleteApi
 from datetime import datetime, timezone, timedelta
 
